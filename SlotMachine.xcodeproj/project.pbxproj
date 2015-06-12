@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA3DCBC31B2B386000AF5038 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3DCBC21B2B386000AF5038 /* Factory.swift */; };
 		AA69EA7D1B2954EB00BC3290 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA69EA7C1B2954EB00BC3290 /* AppDelegate.swift */; };
 		AA69EA7F1B2954EB00BC3290 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA69EA7E1B2954EB00BC3290 /* ViewController.swift */; };
 		AA69EA821B2954EB00BC3290 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA69EA801B2954EB00BC3290 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA3DCBC21B2B386000AF5038 /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		AA69EA771B2954EB00BC3290 /* SlotMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlotMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA69EA7B1B2954EB00BC3290 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA69EA7C1B2954EB00BC3290 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				AA69EA9C1B2AE66200BC3290 /* Slot.swift */,
 				AA69EA801B2954EB00BC3290 /* Main.storyboard */,
 				AA69EA831B2954EB00BC3290 /* Images.xcassets */,
+				AA3DCBC21B2B386000AF5038 /* Factory.swift */,
 				AA69EA851B2954EC00BC3290 /* LaunchScreen.xib */,
 				AA69EA7A1B2954EB00BC3290 /* Supporting Files */,
 			);
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3DCBC31B2B386000AF5038 /* Factory.swift in Sources */,
 				AA69EA7F1B2954EB00BC3290 /* ViewController.swift in Sources */,
 				AA69EA9D1B2AE66200BC3290 /* Slot.swift in Sources */,
 				AA69EA7D1B2954EB00BC3290 /* AppDelegate.swift in Sources */,
@@ -415,6 +419,7 @@
 				AA69EA981B2954EF00BC3290 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA69EA991B2954EF00BC3290 /* Build configuration list for PBXNativeTarget "SlotMachineTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +428,7 @@
 				AA69EA9B1B2954EF00BC3290 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
