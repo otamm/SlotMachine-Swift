@@ -51,6 +51,8 @@ class ViewController: UIViewController {
         self.setupSecondContainer(self.secondContainer);
         self.setupThirdContainer(self.thirdContainer);
         self.setupFourthContainer(self.fourthContainer);
+        
+        Factory.createSlots();
     }
 
     override func didReceiveMemoryWarning() {
