@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     var secondContainer: UIView! ;
     var thirdContainer: UIView! ;
     var fourthContainer: UIView! ;
+    // view elements:
+    var slots: [[Slot]] = [];
     //defining the labels in code.
     var titleLabel: UILabel! ;
     var creditsLabel: UILabel! ;
@@ -48,11 +50,13 @@ class ViewController: UIViewController {
         super.viewDidLoad();
         self.setupContainerViews();
         self.setupFirstContainer(self.firstContainer);
+        // create the slots array which will be populated with images
+        self.slots = Factory.createSlots();
+        // populates the slots array with images
         self.setupSecondContainer(self.secondContainer);
         self.setupThirdContainer(self.thirdContainer);
         self.setupFourthContainer(self.fourthContainer);
         
-        Factory.createSlots();
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,6 +126,16 @@ class ViewController: UIViewController {
                 slotImageView.frame = CGRect(x: containerView.bounds.origin.x + (containerView.bounds.size.width * CGFloat(containerNumber) * kThird), y: containerView.bounds.origin.y + (containerView.bounds.size.height * CGFloat(slotNumber) * kThird), width: containerView.bounds.size.width * kThird - kMarginForSlot, height: containerView.bounds.size.height * kThird - kMarginForSlot);
                 
                 containerView.addSubview(slotImageView);
+                
+                var slot: Slot
+                if slots.count != 0 {
+                    let slotContainer = slots[containerNumber]
+                    slot = slotContainer[slotNumber]
+                    slotImageView.image = slot.image
+                }
+                else {
+                    slotImageView.image = UIImage(named: "Ace")
+                }
                 
             }
             
@@ -251,7 +265,8 @@ class ViewController: UIViewController {
     }
     
     func spinButtonPressed (button: UIButton) {
-        
+        slots = Factory.createSlots();
+        setupSecondContainer(self.secondContainer);
     }
     
 }
