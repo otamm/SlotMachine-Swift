@@ -269,19 +269,38 @@ class ViewController: UIViewController {
             self.showAlertWithText(header: "No More Credits!", message: "YOU LOSE! Reset the Game already.");
         }
         else {
-            if (self.currentBet < ((self.credits + self.currentBet) / 2)) {
+            if (self.currentBet < 40) {
                 self.currentBet += 1;
                 self.credits -= 1;
                 self.updateMainView();
             }
             else {
-                showAlertWithText(header: "Take it easy!", message: "Let's not make that way too quick, shall we?");
+                self.showAlertWithText(header: "Take it easy!", message: "Let's not make that way too quick, shall we?");
             }
         }
     }
     
     func betMaxButtonPressed (button: UIButton) {
-        
+        if (self.credits <= 0) {
+            self.showAlertWithText(header: "No More Credits!", message: "YOU LOSE! Reset the Game already.");
+        }
+        else {
+            if (self.currentBet < 40) {
+                
+                if (self.credits <= 40) {
+                    self.currentBet += self.credits;
+                    self.credits = 0;
+                    self.updateMainView();
+                } else {
+                    self.credits -= (40 - self.currentBet);
+                    self.currentBet += (40 - self.currentBet);
+                    self.updateMainView();
+                }
+                
+            } else {
+                self.showAlertWithText(header: "Take it easy!", message: "Let's not make that way too quick, shall we?");
+            }
+        }
     }
     
     func spinButtonPressed (button: UIButton) {
