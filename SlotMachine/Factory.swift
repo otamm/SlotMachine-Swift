@@ -32,7 +32,7 @@ class Factory {
         
         var currentCardValues:[Int] = [];
         for slot in currentCards {
-            currentCardValues.append(slot.value)
+            currentCardValues.append(slot.value);
         }
         
         var randomNumber = Int(arc4random_uniform(UInt32(13)));

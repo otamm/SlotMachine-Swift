@@ -28,6 +28,11 @@ class ViewController: UIViewController {
     var betTitleLabel: UILabel! ;
     var winnerPaidTitleLabel: UILabel! ;
     
+    // defining label content:
+    var credits = 0;
+    var currentBet = 0;
+    var winnings = 0;
+    
     // defining buttons in code
     var resetButton:UIButton! ;
     var betOneButton:UIButton! ;
@@ -53,9 +58,11 @@ class ViewController: UIViewController {
         // create the slots array which will be populated with images
         self.slots = Factory.createSlots();
         // populates the slots array with images
-        self.setupSecondContainer(self.secondContainer);
+        //self.setupSecondContainer(self.secondContainer); becomes redundant since its being called inside self.hardReset below
+        //self.hardReset();
         self.setupThirdContainer(self.thirdContainer);
         self.setupFourthContainer(self.fourthContainer);
+        self.hardReset();
         
     }
 
@@ -127,14 +134,14 @@ class ViewController: UIViewController {
                 
                 containerView.addSubview(slotImageView);
                 
-                var slot: Slot
+                var slot: Slot;
                 if slots.count != 0 {
-                    let slotContainer = slots[containerNumber]
-                    slot = slotContainer[slotNumber]
-                    slotImageView.image = slot.image
+                    let slotContainer = slots[containerNumber];
+                    slot = slotContainer[slotNumber];
+                    slotImageView.image = slot.image;
                 }
                 else {
-                    slotImageView.image = UIImage(named: "Ace")
+                    slotImageView.image = UIImage(named: "Ace");
                 }
                 
             }
@@ -253,11 +260,24 @@ class ViewController: UIViewController {
     //IBActions: actions triggered directly by the interaction with UI elements.
     
     func resetButtonPressed(button: UIButton) {
-        println("This is the action triggered when button is pressed.");
+        //println("This is the action triggered when button is pressed.");
+        self.hardReset();
     }
     
     func betOneButtonPressed (button: UIButton) {
-        
+        if (self.credits <= 0) {
+            self.showAlertWithText(header: "No More Credits!", message: "YOU LOSE! Reset the Game already.");
+        }
+        else {
+            if (self.currentBet < ((self.credits + self.currentBet) / 2)) {
+                self.currentBet += 1;
+                self.credits -= 1;
+                self.updateMainView();
+            }
+            else {
+                showAlertWithText(header: "Take it easy!", message: "Let's not make that way too quick, shall we?");
+            }
+        }
     }
     
     func betMaxButtonPressed (button: UIButton) {
@@ -265,9 +285,50 @@ class ViewController: UIViewController {
     }
     
     func spinButtonPressed (button: UIButton) {
+        // removes old image views before replacing them with new ones; allows for better memory management.
+        // without this function's usage, the images would only get 'on the top' of each other and the app would get slower and eventually crash for excessive memory usage.
+        self.removeSlotImageViews();
         slots = Factory.createSlots();
         setupSecondContainer(self.secondContainer);
     }
     
+    // functions used to encapsulate other actions:
+    func removeSlotImageViews () {
+        if self.secondContainer != nil {
+            let container: UIView? = self.secondContainer; // optional, there's a chance there will be no subviews.
+            let subViews:Array? = container!.subviews; //same; unwrap the 'subviews' property.
+            for view in subViews! {
+                view.removeFromSuperview(); // since subViews is an array of the second container subviews, these will be removed from the second container.
+            }
+        }
+    }
+    
+    // sets game to its original state.
+    func hardReset() {
+        self.removeSlotImageViews();
+        slots.removeAll(keepCapacity: true); // keeps memory allocation for the array, only cleaning out values
+        self.setupSecondContainer(self.secondContainer);
+        self.credits = 50; // initial credits value
+        self.winnings = 0;
+        self.currentBet = 0;
+        
+        self.updateMainView();
+    }
+    
+    // updates labels text with number values
+    func updateMainView() {
+        self.creditsLabel.text = "\(self.credits)";
+        self.betLabel.text = "\(self.currentBet)";
+        self.winnerPaidLabel.text = "\(self.winnings)";
+    }
+    
+    
+    // pops up alert. first param has a default.
+    func showAlertWithText (header: String = "Warning", message: String) {
+        var alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.Alert);//preferredStyle is just the default value for it.
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil));
+        self.presentViewController(alert, animated: true, completion: nil);
+    }
+
 }
 
